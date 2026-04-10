@@ -86,3 +86,16 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.1;
     text-wrap: balance;
 }
+
+article {
+    padding: 1em 0;
+    border-bottom: 1px solid oklch(80% 3% 200);
+}
+
+time {
+    color: oklch(50% 0% 0);
+}
+
+section {
+    margin-block: 1.5em;
+}
