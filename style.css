@@ -56,3 +56,8 @@ form label {
 form button {
     grid-column: 1 / -1;
 }
+
+form input, form textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
