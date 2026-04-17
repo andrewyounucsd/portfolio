@@ -101,3 +101,15 @@ h1, h2, h3, h4, h5, h6 {
 .resume section {
     margin-block: 1.5em;
 }
+
+.color-scheme {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 80%;
+    font-family: inherit;
+}
+
+input, textarea, button, select {
+    font: inherit;
+}
