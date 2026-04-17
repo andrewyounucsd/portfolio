@@ -11,7 +11,7 @@ nav {
     --border-color: oklch(50% 10% 200 / 40%);
     display: flex;
     margin-bottom: 2em;
-    border-bottom: 1px solid oklch(80% 3% 200);
+    border-bottom: 1px solid var(--border-color);
 }
 
 nav a {
@@ -23,7 +23,7 @@ nav a {
 }
 
 nav a.current {
-    border-bottom: 0.4em var(--border-color);
+    border-bottom: 0.4em solid var(--border-color);
     padding-bottom: 0.1em;
 }
 
