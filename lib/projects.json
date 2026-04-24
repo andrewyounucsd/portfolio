@@ -1,8 +1,9 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet atque earum eligendi fuga repellendus architecto dignissimos praesentium saepe quaerat, pariatur aperiam reprehenderit a officiis aliquam quia. Corrupti enim mollitia soluta!"
+        "title": "League of Legends Analysis",
+        "year": 2025,
+        "image": "../images/LoLanalysis.png",
+        "description": "A deepdive into the popular MMO game League of Legends and the relevance of one of the main objectives in the game: Atakhan."
     },
     {
         "title": "Quibusdam corrupti atque nobis!",
