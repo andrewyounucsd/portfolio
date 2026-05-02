@@ -10,6 +10,14 @@ projectsTitle.textContent = `${projects.length} Projects`;
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 let selectedIndex = -1;
+let query = '';
+
+function getFilteredProjects() {
+  return projects.filter((project) => {
+    let values = Object.values(project).join('\n').toLowerCase();
+    return values.includes(query.toLowerCase());
+  });
+}
 
 function renderPieChart(projectsGiven) {
   let rolledData = d3.rollups(
@@ -47,11 +55,13 @@ function renderPieChart(projectsGiven) {
           .selectAll('li')
           .attr('class', (_, i) => i === selectedIndex ? 'legend-item selected' : 'legend-item');
 
+        let currentFiltered = getFilteredProjects();
+
         if (selectedIndex === -1) {
-          renderProjects(projects, projectsContainer, 'h2');
+          renderProjects(currentFiltered, projectsContainer, 'h2');
         } else {
           let selectedYear = data[selectedIndex].label;
-          let filteredProjects = projects.filter((p) => p.year == selectedYear);
+          let filteredProjects = currentFiltered.filter((p) => p.year == selectedYear);
           renderProjects(filteredProjects, projectsContainer, 'h2');
         }
       });
@@ -70,15 +80,11 @@ function renderPieChart(projectsGiven) {
 renderProjects(projects, projectsContainer, 'h2');
 renderPieChart(projects);
 
-let query = '';
 let searchInput = document.querySelector('.searchBar');
 
 searchInput.addEventListener('input', (event) => {
   query = event.target.value;
-  let filteredProjects = projects.filter((project) => {
-    let values = Object.values(project).join('\n').toLowerCase();
-    return values.includes(query.toLowerCase());
-  });
+  let filteredProjects = getFilteredProjects();
   renderProjects(filteredProjects, projectsContainer, 'h2');
   renderPieChart(filteredProjects);
 });
