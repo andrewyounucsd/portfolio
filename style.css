@@ -161,3 +161,20 @@ input, textarea, button, select {
   align-items: center;
   gap: 2em;
 }
+
+.selected {
+  --color: oklch(60% 45% 0) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
+}
+
+svg path {
+  cursor: pointer;
+  transition: 300ms;
+}
+
+svg:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
+}

@@ -9,6 +9,7 @@ projectsTitle.textContent = `${projects.length} Projects`;
 
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
+let selectedIndex = -1;
 
 function renderPieChart(projectsGiven) {
   let rolledData = d3.rollups(
@@ -25,34 +26,50 @@ function renderPieChart(projectsGiven) {
   let arcData = sliceGenerator(data);
   let arcs = arcData.map((d) => arcGenerator(d));
 
-  // Clear existing paths and legend
   d3.select('svg').selectAll('path').remove();
   d3.select('.legend').selectAll('li').remove();
 
-  // Draw pie chart
+  let svg = d3.select('svg');
   arcs.forEach((arc, idx) => {
-    d3.select('svg')
+    svg
       .append('path')
       .attr('d', arc)
-      .attr('fill', colors(idx));
+      .attr('fill', colors(idx))
+      .attr('class', idx === selectedIndex ? 'selected' : '')
+      .on('click', () => {
+        selectedIndex = selectedIndex === idx ? -1 : idx;
+
+        svg
+          .selectAll('path')
+          .attr('class', (_, i) => i === selectedIndex ? 'selected' : '');
+
+        d3.select('.legend')
+          .selectAll('li')
+          .attr('class', (_, i) => i === selectedIndex ? 'legend-item selected' : 'legend-item');
+
+        if (selectedIndex === -1) {
+          renderProjects(projects, projectsContainer, 'h2');
+        } else {
+          let selectedYear = data[selectedIndex].label;
+          let filteredProjects = projects.filter((p) => p.year == selectedYear);
+          renderProjects(filteredProjects, projectsContainer, 'h2');
+        }
+      });
   });
 
-  // Draw legend
   let legend = d3.select('.legend');
   data.forEach((d, idx) => {
     legend
       .append('li')
       .attr('style', `--color:${colors(idx)}`)
-      .attr('class', 'legend-item')
+      .attr('class', idx === selectedIndex ? 'legend-item selected' : 'legend-item')
       .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
   });
 }
 
-// Initial render
 renderProjects(projects, projectsContainer, 'h2');
 renderPieChart(projects);
 
-// Search functionality
 let query = '';
 let searchInput = document.querySelector('.searchBar');
 
