@@ -119,3 +119,9 @@ input, textarea, button, select {
     height: 200px;
     object-fit: cover;
 }
+
+.project-year {
+    font-family: Baskerville, serif;
+    font-variant-numeric: oldstyle-nums;
+    color: oklch(50% 0% 0);
+}
