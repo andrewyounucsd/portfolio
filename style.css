@@ -178,3 +178,20 @@ svg path {
 svg:has(path:hover) path:not(:hover) {
   opacity: 0.5;
 }
+
+.stats {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5em 1em;
+}
+
+.stats dt {
+  color: oklch(50% 0% 0);
+  font-size: 0.85em;
+  text-transform: uppercase;
+}
+
+.stats dd {
+  margin: 0;
+  font-weight: bold;
+}

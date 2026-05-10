@@ -46,3 +46,25 @@ function processCommits(data) {
 
 let commits = processCommits(data);
 console.log(commits);
+
+function renderCommitInfo(data, commits) {
+  const dl = d3.select('#stats').append('dl').attr('class', 'stats');
+
+  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+  dl.append('dd').text(data.length);
+
+  dl.append('dt').text('Total commits');
+  dl.append('dd').text(commits.length);
+
+  dl.append('dt').text('Number of files');
+  dl.append('dd').text(d3.group(data, d => d.file).size);
+
+  dl.append('dt').text('Average line length');
+  dl.append('dd').text(Math.round(d3.mean(data, d => d.length)) + ' chars');
+
+  dl.append('dt').text('Most active time of day');
+  const workByPeriod = d3.rollups(data, v => v.length, d => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' }));
+  dl.append('dd').text(d3.greatest(workByPeriod, d => d[1])?.[0]);
+}
+
+renderCommitInfo(data, commits);
