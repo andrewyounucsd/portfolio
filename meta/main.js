@@ -323,8 +323,6 @@ function createBrushSelector(svg) {
   svg.selectAll('.dots, .overlay ~ *').raise();
 }
 
-import scrollama from 'https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm';
-
 d3.select('#scatter-story')
   .selectAll('.step')
   .data(commits)
